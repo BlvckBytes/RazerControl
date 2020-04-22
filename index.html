@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta settings -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RazerControl</title>
+
+        <!-- External resources -->
+        <link rel="stylesheet" href="web_resources/styles/master.css">
+        <script src="web_resources/scripts/dropdown.js"></script>
+        <script src="web_resources/scripts/changeWatcher.js"></script>
+        <script src="web_resources/scripts/sliderManager.js"></script>
+    </head>
+    <body>
+
+        <!-- Page-wrapper (used in dev-phase and for change event) -->
+        <div id="wrapper">
+
+            <!-- Dropdown control block -->
+            <div class="control-block">
+                <p>Keyboard mode</p>
+                <div class="dropdown" id="kb-mode">
+
+                    <!-- Currently selected item -->
+                    <p class="dropdown-current">Static</p>
+                    <img src="web_resources/images/dropdown.png" alt="dropdown">
+
+                    <!-- Dropdown items (keyboard modes) -->
+                    <div class="dropdown-items">
+                        <p>Breathe</p>
+                        <p>Starlight</p>
+                        <p>Reactive</p>
+                        <p>Spectrum</p>
+                        <p>Wave left</p>
+                        <p>Wave right</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color mixer control block -->
+            <div class="control-block">
+                <p>Color mixer</p>
+
+                <!-- RED -->
+                <div class="slider">
+                    <label for="MXR_val">R</label>
+                    <input type="range" id="MXR_val" min="0" max="255" value="0">
+                    <p>0</p>
+                </div>
+
+                <!-- GREEN -->
+                <div class="slider">
+                    <label for="MXG_val">G</label>
+                    <input type="range" id="MXG_val" min="0" max="255" value="0">
+                    <p>0</p>
+                </div>
+
+                <!-- BLUE -->
+                <div class="slider">
+                    <label for="MXB_val">B</label>
+                    <input type="range" id="MXB_val" min="0" max="255" value="0">
+                    <p>0</p>
+                </div>
+
+                <div id="result-color"><p>Result</p></div>
+            </div>
+
+            <!-- Settings control block -->
+            <div class="control-block" id="settings-block">
+                <p>Settings</p>
+
+                <!-- Delay -->
+                <div class="slider">
+                    <label for="Delay_val">Delay</label>
+                    <input type="range" id="Delay_val" min="1" max="3" value="0">
+                    <p>0</p>
+                </div>
+
+                <!-- Light -->
+                <div class="slider">
+                    <label for="Light_val">Light</label>
+                    <input type="range" id="Light_val" min="0" max="255" value="255">
+                    <p>0</p>
+                </div>
+
+                <!-- Logo switch -->
+                <div class="switch">
+                    <label for="Logo_val">Logo</label>
+                    <div class="switch-wrapper">
+                        <input type="checkbox" id="Logo_val">
+                        <div class="switch-body">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

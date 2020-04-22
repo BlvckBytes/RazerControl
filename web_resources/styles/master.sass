@@ -1,0 +1,226 @@
+/////////////////////////////
+//        COLORS          //
+////////////////////////////
+
+$bodyColor: transparentize( darken( #333, 10% ), 0.1 )
+$controlColor: darken( #fff, 5% )
+
+/////////////////////////////
+//        GENERIC         //
+////////////////////////////
+
+// Offline available roboto font face
+@font-face
+  font-family: 'Roboto'
+  font-style: normal
+  font-weight: 300
+  src: url('../fonts/roboto-v20-latin-300.eot') /* IE9 Compat Modes */
+  src: local('Roboto Light'), local('Roboto-Light'), url('../fonts/roboto-v20-latin-300.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto-v20-latin-300.woff2') format('woff2'), url('../fonts/roboto-v20-latin-300.woff') format('woff'), url('../fonts/roboto-v20-latin-300.ttf') format('truetype'), url('../fonts/roboto-v20-latin-300.svg#Roboto') format('svg')
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html
+  font-family: "Roboto", sans-serif
+  font-weight: 300
+
+body
+  margin-top: 20px
+  user-select: none
+
+/////////////////////////////
+//        WRAPPER         //
+////////////////////////////
+
+#wrapper:before
+  content: ''
+  height: 0
+  width: 0
+  border-width: 0 15px 12px 15px
+  border-style: solid
+  border-color: transparent transparent $bodyColor transparent
+  position: absolute
+  top: -12px
+  left: 50%
+  transform: translateX( -50% )
+
+#wrapper
+  text-align: center
+  background: $bodyColor
+  padding: 20px 25px
+  border-radius: 5px
+  max-width: 260px
+  position: relative
+
+/////////////////////////////
+//     CONTROL BLOCKS     //
+////////////////////////////
+
+.control-block
+  color: white
+  text-align: left
+  margin-top: 25px
+
+  & > p
+    margin-bottom: 3px
+    font-size: 15px
+
+  &:first-of-type
+    margin-top: 0
+
+  &:last-of-type
+    margin-top: 23px
+
+#settings-block input[type="range"]
+  width: 123px
+
+/////////////////////////////
+//       DROPDOWN         //
+////////////////////////////
+
+.dropdown
+  cursor: pointer
+  background: $controlColor
+  border-radius: 5px
+  position: relative
+  display: flex
+  justify-content: space-between
+  align-items: center
+  color: black
+  padding: 10px 15px
+
+  & > img
+    width: 12px
+
+.dropdown-items
+  width: 100%
+  background: $controlColor
+  position: absolute
+  left: 0
+  top: 43px
+  border-radius: 5px
+  display: none
+  justify-content: space-between
+  align-items: center
+  flex-direction: column
+  height: 100px
+  overflow-y: scroll
+
+  & p
+    text-align: center
+    padding: 10px
+    width: 100%
+    transition: background 50ms ease-in-out
+
+    &:hover
+      background: lighten( $bodyColor, 20% )
+      color: white
+
+/////////////////////////////
+//        SLIDERS         //
+////////////////////////////
+
+.slider
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 5px
+
+  & input
+    -webkit-appearance: none
+    appearance: none
+    background: $controlColor
+    outline: none
+    height: 1.5px
+    border-radius: 2px
+    width: 150px
+
+    &::-webkit-slider-thumb, &::-moz-range-thumb
+      height: 12px
+      width: 12px
+      background: lighten( $controlColor, 5% )
+      border-radius: 50%
+      border: none
+      cursor: pointer
+
+  &:last-of-type
+    margin-bottom: 0
+
+/////////////////////////////
+//     RESULT FIELD       //
+////////////////////////////
+
+#result-color
+  color: white
+  width: 100%
+  height: 30px
+  background: darkorange
+  margin-top: 15px
+  border-radius: 5px
+  display: flex
+  align-items: center
+  justify-content: center
+  font-size: 14px
+  position: relative
+
+  & p
+    position: absolute
+    top: -7px
+    background: lighten( $bodyColor, 5% )
+    padding: 2px 5px
+    border-radius: 3px
+    left: 50%
+    transform: translateX( -50% )
+
+/////////////////////////////
+//        SWITCH          //
+////////////////////////////
+
+.switch
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: center
+
+.switch-body
+  margin-left: 15px
+  background: lighten( #333, 30% )
+  width: 50px
+  height: 20px
+  border-radius: 30px
+  transition: background 80ms ease-in-out
+  display: flex
+  align-items: center
+
+  span
+    height: 16px
+    width: 16px
+    border-radius: 50%
+    background: $controlColor
+    display: inline-block
+    margin: 0 5px
+    transition: transform 80ms ease-in-out
+
+.switch-wrapper
+  position: relative
+
+  & input
+    position: absolute
+    width: 50px
+    height: 20px
+    top: 0
+    left: 15px
+    opacity: 0
+    z-index: 100
+    cursor: pointer
+
+    &:checked
+
+      & ~ .switch-body
+        background: #89D391
+
+      & ~ .switch-body span
+        transform: translateX( 23.5px )
