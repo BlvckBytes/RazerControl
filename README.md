@@ -1,6 +1,6 @@
 # RazerControl
 
-This is a GUI, which resides in your menubar. The icon is a razor-blade, which is - as you may guess - a intended pun. It uses the amazing work of [kprinssu](https://github.com/kprinssu/osx-razer-blade) which then has been forked by [dylanparker](https://github.com/dylanparker/osx-razer-led), who has added the command line functionallity. My software then executes the needed shell commands.
+This is a GUI, which resides in your menubar. The icon is a razor-blade, which is - as you may guess - a intended pun. It uses the amazing work of [kprinssu](https://github.com/kprinssu/osx-razer-blade) which then has been forked by [dylanparker](https://github.com/dylanparker/osx-razer-led), who added the command line functionallity. My software then executes the needed shell commands.
 
 ![User Interface](readme_images/userinterface.png)
 
