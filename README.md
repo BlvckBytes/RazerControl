@@ -21,3 +21,4 @@ As already stated, this needs the dependency *osx-razer-led*, compiled (which yo
 - [ ] Keeping the right order in dropdown item list
 - [ ] Fix slider positioning (length)
 - [ ] Add terminate button
+- [ ] Implement update notifier or even auto-updater
