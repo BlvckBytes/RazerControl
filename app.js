@@ -38,7 +38,6 @@ webserv.get( "/exec", ( req, res ) => {
   // Dispatch command in shell
   const command = "/usr/local/bin/osx-razer-led " + req.query.command;
   exec( command, ( err, stderr ) => {
-    // Error occurs only if binary not found, afaik
     if( err )
       res.send( "ERR: " + err + " " + stderr );
     else
@@ -48,7 +47,7 @@ webserv.get( "/exec", ( req, res ) => {
 
 // Start internal webserver on specified port
 webserv.listen( port, () => {
-  console.log( "Internal webserver running on port " + 9138 + "!" );
+  console.log( "Internal webserver running on port " + port + "!" );
 } );
 
 // Notify when menubar app is up
