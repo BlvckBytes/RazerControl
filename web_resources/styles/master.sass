@@ -224,3 +224,41 @@ body
 
       & ~ .switch-body span
         transform: translateX( 23.5px )
+
+/////////////////////////////
+//     STATUS METER       //
+////////////////////////////
+
+#status-meter
+  padding: 3px 10px
+  font-size: 12px
+  display: flex
+  align-items: center
+  background: lighten( #000, 5% )
+  color: #58C93D
+  position: absolute
+  bottom: 0
+  right: 0
+  border-top-left-radius: 5px
+  border-bottom-right-radius: 5px
+
+  & img
+    width: 10px
+    margin-left: 8px
+    animation: tick_hover 1600ms ease-in-out infinite
+    margin-top: 3.5px
+
+@keyframes tick_hover
+  0%
+    transform: translateY( 0 )
+  50%
+    transform: translateY( -3px )
+  100%
+    transform: translateY( 0 )
+
+
+.status-meter-active
+  color: #E8A353 !important
+
+  & img
+    display: none !important

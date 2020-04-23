@@ -14,7 +14,7 @@ const mb = menubar( {
   browserWindow: {
     frame: false,
     width: 255,
-    height: 410,
+    height: 415,
     hasShadow: true,
     transparent: true,
     resizable: false,

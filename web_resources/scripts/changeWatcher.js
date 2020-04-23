@@ -16,6 +16,7 @@ document.addEventListener( "DOMContentLoaded", () => {
   let lastTimeout;
 
   function update( e ) {
+    setStatusMeter( false );
 
     // Update result color
     let r = rVal.value, g = gVal.value, b = bVal.value;
@@ -120,12 +121,32 @@ document.addEventListener( "DOMContentLoaded", () => {
       // Error message from server, display if exists
       if( req.response.startsWith( "ERR" ) )
         window.alert( req.response );
-    };
 
-    console.log( params );
+      setStatusMeter( true );
+    };
 
     req.open( "GET", "http://localhost:9138/exec?command=" + params );
     req.send();
+  }
+
+  /**
+   * Sets the bottom right status meter to writing or done
+   * @param status False is writing, true done
+   */
+  function setStatusMeter( status) {
+    const meter = document.getElementById( "status-meter" );
+
+    // True - it's up to date
+    if( status ) {
+      meter.classList.remove( "status-meter-active" );
+      meter.querySelector( "p" ).innerHTML = "Up to date";
+    }
+
+    // False - writing to keyboard
+    else {
+      meter.classList.add( "status-meter-active" );
+      meter.querySelector( "p" ).innerHTML = "Writing...";
+    }
   }
 
   // Listen for changes on logo switch

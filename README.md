@@ -16,5 +16,6 @@ As already stated, this needs the dependency *osx-razer-led*, compiled (which yo
 
 ## Future plans
 
-- [ ] Add a visual for sending commands
+- [x] Add a visual for sending commands
 - [ ] Make the settings persistent over re-launch
+- [ ] Keeping the right order in dropdown item list

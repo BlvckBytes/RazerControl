@@ -201,4 +201,42 @@ body {
   transform: translateX(23.5px);
 }
 
+#status-meter {
+  padding: 3px 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  background: #0d0d0d;
+  color: #58C93D;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#status-meter img {
+  width: 10px;
+  margin-left: 8px;
+  animation: tick_hover 1600ms ease-in-out infinite;
+  margin-top: 3.5px;
+}
+
+@keyframes tick_hover {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.status-meter-active {
+  color: #E8A353 !important;
+}
+.status-meter-active img {
+  display: none !important;
+}
+
 /*# sourceMappingURL=master.css.map */
