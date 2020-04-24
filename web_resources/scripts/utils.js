@@ -1,3 +1,5 @@
+const internal_server_port = 9138;
+
 /**
  * Dispatches the given url data by sending it to the built-in server
  * @param urlData Get path aswell as get key value pairs
@@ -27,6 +29,6 @@ function serverDispatch( urlData, success ) {
   };
 
   // Open connection and send request
-  req.open( "GET", "http://localhost:9138/" + urlData );
+  req.open( "GET", "http://localhost:" + internal_server_port + "/" + urlData );
   req.send();
 }

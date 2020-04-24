@@ -8,8 +8,6 @@ This is a GUI, which resides in your menubar. The icon is a razor-blade, which i
 
 Please check out the releases section of this repo, you can find binaries in the OSX app format there. Place it into your application folder and set it as a login item in system preferences > users & groups > login items, if you want to.
 
-As already stated, this needs the dependency *osx-razer-led*, compiled (which you can easily do in xcode) as a binary in */usr/local/bin*. Don't forget to make it executable, by running *chmod +x osx-razer-led*. You can download precompiled binaries [here](https://github.com/dylanparker/osx-razer-led/releases).
-
 ## Future plans
 
 - [x] Add a visual for sending commands
@@ -19,4 +17,4 @@ As already stated, this needs the dependency *osx-razer-led*, compiled (which yo
 - [x] Add terminate button
 - [ ] Implement update notifier
 - [x] Package this as an OSX app
-- [ ] Automatically download needed binary from repo
+- [x] Automatically download needed binary from repo

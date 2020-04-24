@@ -4,6 +4,7 @@
 
 $bodyColor: transparentize( darken( #333, 10% ), 0.1 )
 $controlColor: darken( #fff, 5% )
+$accentColor: #7871AA
 
 /////////////////////////////
 //        GENERIC         //
@@ -298,3 +299,43 @@ body
 
   & img
     height: 10px
+
+/////////////////////////////
+//     NOTIFICATION       //
+////////////////////////////
+
+#notification-overlay
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  background: #333
+  border-radius: 5px
+  display: none
+  flex-direction: column
+  align-items: center
+  padding: 40px 20px 30px 20px
+  z-index: 9999
+  color: white
+
+  & img
+    width: 35px
+
+  & h1
+    font-size: 18px
+    margin-top: 20px
+
+  & p
+    font-size: 14px
+
+  & span
+    background: $accentColor
+    padding: 8px 35px
+    border-radius: 4px
+    cursor: pointer
+
+  & div
+    flex-grow: 1
+    overflow-y: scroll
+    margin: 15px 0 20px 0

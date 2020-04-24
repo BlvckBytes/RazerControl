@@ -1,71 +1,131 @@
 // Modules needed
-const { menubar } = require( 'menubar' );
-const express = require( 'express' );
-const exec = require( 'child_process' ).exec;
-const cors = require( 'cors' );
+const { menubar } = require( "menubar" );
+const express = require( "express" );
+const exec = require( "child_process" ).exec;
+const cors = require( "cors" );
 
-// Webserver
-const port = 9138;
-const webserv = express();
-webserv.use( cors() );
+let displayPopup = undefined;
 
-// All needed properties for the menubar entry
-const mb = menubar( {
-  browserWindow: {
-    frame: false,
-    width: 255,
-    height: 415,
-    hasShadow: true,
-    transparent: true,
-    resizable: false,
-    movable: false,
-    minimizable: false,
-    maximizable: false
-  }
-} );
+const launch = () => {
+  /////////////////////////////
+  //      MENUBAR ITEM      //
+  ////////////////////////////
 
-// Start internal webserver on specified port
-const servInst = webserv.listen( port, () => {
-  console.log( "Internal webserver running on port " + port + "!" );
-} );
-
-// Notify when menubar app is up
-mb.on( 'ready', () => {
-  console.log( 'Menubar app is ready for use!' );
-} );
-
-// /exec path route, used for command execution
-webserv.get( "/exec", ( req, res ) => {
-  // Get arguments for binary from URL
-  const args = req.query.command;
-
-  // Nothing provided
-  if( !args ) {
-    res.send( "ERR: No command provided" );
-    return;
-  }
-
-  // Dispatch command in shell
-  const command = "/usr/local/bin/osx-razer-led " + req.query.command;
-  exec( command, ( err, stderr ) => {
-    if( err )
-      res.send( "ERR: " + err + " " + stderr );
-    else
-      res.send( "OK" );
+  // All needed properties for the menubar entry
+  const mb = menubar( {
+    browserWindow: {
+      frame: false,
+      width: 255,
+      height: 415,
+      hasShadow: true,
+      transparent: true,
+      resizable: false,
+      movable: false,
+      minimizable: false,
+      maximizable: false
+    }
   } );
-} );
 
-// /terminate path route, used to shut this tool down
-webserv.get( "/terminate", ( req, res ) => {
-  // Send OK so no error appears
-  console.log( "Going to terminate now!" );
-  res.send( "OK" );
+  // Notify when menubar app is up
+  mb.on( "ready", () => {
+    console.log( "Menubar app is ready for use!" );
+  } );
 
-  // Shutdown express
-  console.log( "Quitting web-server..." );
-  servInst.close();
+  /////////////////////////////
+  //       WEBSERVER        //
+  ////////////////////////////
 
-  // Shut down menubar item
-  console.log( "Quitting main application..." );
-  mb.app.quit();
+  // Webserver port, also make it use CORS (Cross-origin resource sharing)
+  // in order to be able to communicate duplex entirely on 127.0.0.1
+  const port = 9138;
+  const webserv = express();
+  webserv.use( cors() );
+
+  // Start internal webserver on specified port
+  const servInst = webserv.listen( port, () => {
+    console.log( "Internal webserver running on port " + port + "!" );
+  } );
+
+  // /exec path route, used for command execution
+  webserv.get( "/exec", ( req, res ) => {
+    // Get arguments for binary from URL
+    const args = req.query.command;
+
+    // Nothing provided
+    if( !args ) {
+      res.send( "ERR: No command provided" );
+      return;
+    }
+
+    // Dispatch command in shell
+    const command = "/usr/local/bin/osx-razer-led " + req.query.command;
+    exec( command, ( err, stderr ) => {
+      if( err )
+        res.send( "ERR: " + err + " " + stderr );
+      else
+        res.send( "OK" );
+    } );
+  } );
+
+  // /terminate path route, used to shut this tool down
+  webserv.get( "/terminate", ( req, res ) => {
+    // Send OK so no error appears
+    res.send( "OK" );
+    terminate();
+  } );
+
+  // /notification, interface between browser and backend to display notifications on launch
+  webserv.get( "/notification", ( req, res ) => {
+    // No popup to display
+    if( displayPopup === undefined ) {
+      res.send( "null" );
+      return;
+    }
+
+    // Reset popup after display
+    res.send( displayPopup );
+    displayPopup = undefined;
+  } );
+
+  /**
+   * Terminate this application, with it's menubar item and
+   * it's internal webserver
+   */
+  const terminate = () => {
+    console.log( "Going to terminate now!" );
+
+    // Shutdown express
+    console.log( "Quitting web-server..." );
+    servInst.close();
+
+    // Shut down menubar item
+    console.log( "Quitting main application..." );
+    mb.app.quit();
+  };
+};
+
+/////////////////////////////
+//   BINARY DOWNLOADER    //
+////////////////////////////
+
+// Include and call downloader module
+const downloader = require( "./electron_modules/binaryDownloader" );
+downloader( ( message ) => {
+
+  // Notify the user of this
+  if( message.startsWith( "ERR" ) ) {
+    displayPopup = "Error while trying to download the needed binary!;" +
+                   "Sadly, the resource could not be downloaded. " +
+                    message;
+  }
+
+  // Notify user of this new download
+  else if( message.startsWith( "NEW" ) ) {
+    displayPopup = "Successfully downloaded the needed binary!;"+
+                   "This software detected the fact, that you were missing the " +
+                   "'osx-razer-led' binary and automatically downloaded it for you from the github repo!";
+  }
+
+  // Launch program, now that this needed binary exists
+  launch();
 } );

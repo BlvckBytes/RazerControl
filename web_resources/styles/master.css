@@ -269,4 +269,41 @@ body {
   height: 10px;
 }
 
+#notification-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #333;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 30px 20px;
+  z-index: 9999;
+  color: white;
+}
+#notification-overlay img {
+  width: 35px;
+}
+#notification-overlay h1 {
+  font-size: 18px;
+  margin-top: 20px;
+}
+#notification-overlay p {
+  font-size: 14px;
+}
+#notification-overlay span {
+  background: #7871AA;
+  padding: 8px 35px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#notification-overlay div {
+  flex-grow: 1;
+  overflow-y: scroll;
+  margin: 15px 0 20px 0;
+}
+
 /*# sourceMappingURL=master.css.map */
