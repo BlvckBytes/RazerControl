@@ -18,4 +18,5 @@ As already stated, this needs the dependency *osx-razer-led*, compiled (which yo
 - [x] Fix slider positioning (length)
 - [x] Add terminate button
 - [ ] Implement update notifier
-- [x] Package this as a OSX app
+- [x] Package this as an OSX app
+- [ ] Automatically download needed binary from repo
