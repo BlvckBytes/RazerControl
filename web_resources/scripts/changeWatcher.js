@@ -89,8 +89,8 @@ document.addEventListener( "DOMContentLoaded", () => {
       else if( e.detail === "Light_val" )
         dispatchParams( "brightness " + light );
 
-      // Send mode command, origin either dropdown or
-      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) )
+      // Send mode command, origin either dropdown or mixer slider or delay slider
+      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) || e.detail.startsWith( "Delay" ) )
         dispatchParams( command );
 
       // Send logo command
@@ -105,35 +105,16 @@ document.addEventListener( "DOMContentLoaded", () => {
    * @param params Params to dispatch
    */
   function dispatchParams( params ) {
-    let req = new XMLHttpRequest();
-
-    // Listen for state changes on the over all progress on request
-    req.onreadystatechange = () => {
-      if( req.readyState !== XMLHttpRequest.DONE )
-        return;
-
-      // Server not properly reachable
-      if( req.status !== 200 ) {
-        window.alert( "Statuscode was " + req.status + ", couln't talk to server." );
-        return;
-      }
-
-      // Error message from server, display if exists
-      if( req.response.startsWith( "ERR" ) )
-        window.alert( req.response );
-
+    serverDispatch( "exec?command=" + params, () => {
       setStatusMeter( true );
-    };
-
-    req.open( "GET", "http://localhost:9138/exec?command=" + params );
-    req.send();
+    } );
   }
 
   /**
    * Sets the bottom right status meter to writing or done
    * @param status False is writing, true done
    */
-  function setStatusMeter( status) {
+  function setStatusMeter( status ) {
     const meter = document.getElementById( "status-meter" );
 
     // True - it's up to date

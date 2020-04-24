@@ -10,6 +10,10 @@ document.addEventListener( "DOMContentLoaded", () => {
     const selected = currDropdown.querySelector( "p" );
     const dropdownIcon = currDropdown.querySelector( "img" );
     const itemHolder = currDropdown.querySelector( ".dropdown-items" );
+    const items = itemHolder.children;
+
+    // Hide initially selected item (first)
+    items[ 0 ].style.display = "none";
 
     // Cache state and listen to click
     let currState = false;
@@ -20,10 +24,14 @@ document.addEventListener( "DOMContentLoaded", () => {
       // Check if selectable item has been clicked
       let parentClasses = event.target.parentElement.className;
       if( event.target.tagName === "P" && parentClasses.includes( "dropdown-items" ) ) {
-        // Swap contents
-        let buf =  selected.innerHTML;
+
+        // Show all items again
+        for( let j = 0; j < items.length; j++ )
+          items[ j ].style.display = "block";
+
+        // Put content of clicked item into selected display and hide item
         selected.innerHTML = event.target.innerHTML;
-        event.target.innerHTML = buf;
+        event.target.style.display = "none";
 
         // Dispatch change event
         wrapper.dispatchEvent( new CustomEvent( "RazerSettingsChanged", { detail: "mode" } ) );

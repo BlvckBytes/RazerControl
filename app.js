@@ -24,7 +24,17 @@ const mb = menubar( {
   }
 } );
 
-// /exec path route
+// Start internal webserver on specified port
+const servInst = webserv.listen( port, () => {
+  console.log( "Internal webserver running on port " + port + "!" );
+} );
+
+// Notify when menubar app is up
+mb.on( 'ready', () => {
+  console.log( 'Menubar app is ready for use!' );
+} );
+
+// /exec path route, used for command execution
 webserv.get( "/exec", ( req, res ) => {
   // Get arguments for binary from URL
   const args = req.query.command;
@@ -45,12 +55,17 @@ webserv.get( "/exec", ( req, res ) => {
   } );
 } );
 
-// Start internal webserver on specified port
-webserv.listen( port, () => {
-  console.log( "Internal webserver running on port " + port + "!" );
-} );
+// /terminate path route, used to shut this tool down
+webserv.get( "/terminate", ( req, res ) => {
+  // Send OK so no error appears
+  console.log( "Going to terminate now!" );
+  res.send( "OK" );
 
-// Notify when menubar app is up
-mb.on( 'ready', () => {
-  console.log( 'Menubar app is ready for use!' );
+  // Shutdown express
+  console.log( "Quitting web-server..." );
+  servInst.close();
+
+  // Shut down menubar item
+  console.log( "Quitting main application..." );
+  mb.app.quit();
 } );

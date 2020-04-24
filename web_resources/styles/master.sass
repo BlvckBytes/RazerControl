@@ -70,8 +70,21 @@ body
   &:first-of-type
     margin-top: 0
 
-  &:last-of-type
-    margin-top: 23px
+  // Custom slider and label fit for 2nd control block
+  &:nth-of-type( 2 ) .slider
+    & label
+      width: 11px
+
+    & input
+      width: 150px
+
+  // Custom slider and label fit for 3rd control block
+  &:nth-of-type( 3 ) .slider
+    & label
+      width: 39px
+
+    & input
+      width: 122px
 
 #settings-block input[type="range"]
   width: 123px
@@ -136,7 +149,6 @@ body
     outline: none
     height: 1.5px
     border-radius: 2px
-    width: 150px
 
     &::-webkit-slider-thumb, &::-moz-range-thumb
       height: 12px
@@ -148,6 +160,9 @@ body
 
   &:last-of-type
     margin-bottom: 0
+
+  & p
+    width: 27px
 
 /////////////////////////////
 //     RESULT FIELD       //
@@ -256,9 +271,30 @@ body
   100%
     transform: translateY( 0 )
 
-
 .status-meter-active
   color: #E8A353 !important
 
   & img
     display: none !important
+
+/////////////////////////////
+//      TERMINATOR        //
+////////////////////////////
+
+#terminate-cross
+  position: absolute
+  top: 0
+  right: 0
+  background: #E56161
+  border-top-right-radius: 5px
+  width: 20px
+  height: 20px
+  display: flex
+  align-items: center
+  justify-content: center
+  border-bottom-left-radius: 10px
+  padding: 0 0 2px 2px
+  cursor: pointer
+
+  & img
+    height: 10px

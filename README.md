@@ -6,11 +6,7 @@ This is a GUI, which resides in your menubar. The icon is a razor-blade, which i
 
 ## Installation
 
-This is **not** a finished package *yet*, so you'll have to just download the repo and execute it with the following command:
-
-```bash
-electron app.js
-```
+Please check out the releases section of this repo, you can find binaries in the OSX app format there. Place it into your application folder and set it as a login item in system preferences > users & groups > login items, if you want to.
 
 As already stated, this needs the dependency *osx-razer-led*, compiled (which you can easily do in xcode) as a binary in */usr/local/bin*. Don't forget to make it executable, by running *chmod +x osx-razer-led*. You can download precompiled binaries [here](https://github.com/dylanparker/osx-razer-led/releases).
 
@@ -18,7 +14,8 @@ As already stated, this needs the dependency *osx-razer-led*, compiled (which yo
 
 - [x] Add a visual for sending commands
 - [ ] Make the settings persistent over re-launch
-- [ ] Keeping the right order in dropdown item list
-- [ ] Fix slider positioning (length)
-- [ ] Add terminate button
-- [ ] Implement update notifier or even auto-updater
+- [x] Keeping the right order in dropdown item list
+- [x] Fix slider positioning (length)
+- [x] Add terminate button
+- [ ] Implement update notifier
+- [x] Package this as a OSX app
