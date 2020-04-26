@@ -19,4 +19,4 @@ Please check out the releases section of this repo, you can find binaries in the
 - [ ] Implement update notifier
 - [x] Package this as an OSX app
 - [x] Automatically download needed binary from repo
-- [ ] Migrate downloading of all kinds from wget to curl
+- [x] Migrate downloading of all kinds from wget to curl
