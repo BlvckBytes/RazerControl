@@ -25,7 +25,7 @@ function serverDispatch( urlData, success ) {
 
     // Invoke success callback
     if( success !== undefined )
-      success();
+      success( req.response );
   };
 
   // Open connection and send request

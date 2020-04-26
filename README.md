@@ -10,8 +10,9 @@ Please check out the releases section of this repo, you can find binaries in the
 
 ## Future plans
 
+- [x] Fix first window draw delay (preload)
 - [x] Add a visual for sending commands
-- [ ] Make the settings persistent over re-launch
+- [x] Make the settings persistent over re-launch
 - [x] Keeping the right order in dropdown item list
 - [x] Fix slider positioning (length)
 - [x] Add terminate button

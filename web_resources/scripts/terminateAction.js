@@ -4,6 +4,7 @@ document.addEventListener( "DOMContentLoaded", () => {
   const closeBtn = document.getElementById( "terminate-cross" );
   closeBtn.addEventListener( "click", () => {
 
+    // Terminate on close button
     serverDispatch( "terminate" );
 
   } );

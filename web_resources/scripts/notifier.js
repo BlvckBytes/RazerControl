@@ -11,25 +11,15 @@ document.addEventListener( "DOMContentLoaded", () => {
     notifyOverlay.style.display = "none";
   } );
 
-  // Create a new request
-  let req = new XMLHttpRequest();
-  req.onreadystatechange = () => {
-    if( req.readyState !== XMLHttpRequest.DONE || req.status !== 200 )
-      return;
-
+  serverDispatch( "notification", response => {
     // Nothing to display
-    if( req.response === "null" )
+    if( response === "null" )
       return;
 
     // Data to display, show overlay with content
-    const data = req.response.split( ";" );
+    const data = response.split( ";" );
     notifyOverlay.style.display = "flex";
     headline.innerHTML = data[ 0 ];
     body.innerHTML = data[ 1 ];
-  };
-
-  // Open connection and send request
-  req.open( "GET", "http://localhost:" + internal_server_port + "/notification" );
-  req.send();
-
+  } );
 } );

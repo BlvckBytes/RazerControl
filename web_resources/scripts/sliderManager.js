@@ -18,7 +18,10 @@ document.addEventListener( "DOMContentLoaded", () => {
       wrapper.dispatchEvent( new CustomEvent( "RazerSettingsChanged", { detail: input.id } ) );
     } );
 
-    // Initial call
+    // Just update the label when settings have been loaded
+    input.addEventListener( "SettingsLoaded", () => { label.innerHTML = pad( input.value, 3 ); } );
+
+      // Initial call
     label.innerHTML = pad( input.value, 3 );
   }
 

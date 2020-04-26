@@ -4,7 +4,12 @@ const express = require( "express" );
 const exec = require( "child_process" ).exec;
 const cors = require( "cors" );
 
+// Self-written modules
+const storage = require( "./electron_modules/settingsStorage" );
+const downloader = require( "./electron_modules/binaryDownloader" );
+
 let displayPopup = undefined;
+let settings = undefined;
 
 const launch = () => {
   /////////////////////////////
@@ -23,7 +28,9 @@ const launch = () => {
       movable: false,
       minimizable: false,
       maximizable: false
-    }
+    },
+    preloadWindow: true,
+    showDockIcon: false
   } );
 
   // Notify when menubar app is up
@@ -87,6 +94,18 @@ const launch = () => {
     displayPopup = undefined;
   } );
 
+  // /settingsread to request current settings
+  webserv.get( "/settingsread", ( req, res ) => {
+    res.send( settings );
+  } );
+
+  // /settingswrite to update current settings
+  webserv.get( "/settingswrite", ( req, res ) => {
+    settings = req.query.settings;
+    storage.write( settings );
+    res.send( "OK" );
+  } );
+
   /**
    * Terminate this application, with it's menubar item and
    * it's internal webserver
@@ -109,10 +128,9 @@ const launch = () => {
 ////////////////////////////
 
 // Include and call downloader module
-const downloader = require( "./electron_modules/binaryDownloader" );
-downloader( ( message ) => {
+downloader( message => {
 
-  // Notify the user of this
+  // Notify the user of the error while trying to download binary
   if( message.startsWith( "ERR" ) ) {
     displayPopup = "Error while trying to download the needed binary!;" +
                    "Sadly, the resource could not be downloaded. " +
@@ -126,6 +144,22 @@ downloader( ( message ) => {
                    "'osx-razer-led' binary and automatically downloaded it for you from the github repo!";
   }
 
-  // Launch program, now that this needed binary exists
-  launch();
+  /////////////////////////////
+  //    SETTINGS STORAGE    //
+  ////////////////////////////
+
+  storage.read( json => {
+
+    // Notify the user of the error while trying to create or read settings file
+    if( json.startsWith( "ERR" ) && displayPopup === undefined ) {
+      displayPopup = "Error while trying to read or create the settings file!;"+
+                     "Sadly, the resource could not be used. " +
+                     json
+    }
+
+    settings = json;
+
+    // Launch program, now that this needed binary exists and settings are read
+    launch();
+  } );
 } );
