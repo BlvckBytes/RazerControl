@@ -100,10 +100,8 @@ document.addEventListener( "DOMContentLoaded", () => {
         dispatchParams( "brightness " + light );
 
       // Send mode command, origin either dropdown or mixer slider or delay slider
-      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) || e.detail.startsWith( "Delay" ) ) {
+      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) || e.detail.startsWith( "Delay" ) )
         dispatchParams( command );
-        console.log( command );
-      }
 
       // Send logo command
       else if( e.detail === "logo" )
