@@ -17,7 +17,7 @@
     "menubar": "^8.0.1"
   },
   "productName": "RazerControl",
-  "version": "0.3",
+  "version": "0.4",
   "author": "BlvckBytes",
   "description": "Control-panel as menubar-item for the razer blade",
   "main": "app.js",

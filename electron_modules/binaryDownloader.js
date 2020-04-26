@@ -19,9 +19,10 @@ const init = async ( done ) => {
       return;
     }
 
-    // Get latest release url and execute a wget on it
+    // Get latest release url and execute a curl on it
     let releaseLink = await getLatestReleaseURL();
-    const command = "/usr/local/bin/wget " + releaseLink + " -O /usr/local/bin/osx-razer-led";
+    const command = "/usr/bin/curl -L --output /usr/local/bin/osx-razer-led " + releaseLink;
+    console.log( command );
     exec( command, ( error, stdout, stderr ) => {
       // Notify of error with this command
       if( error ) {

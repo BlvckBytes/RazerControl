@@ -68,7 +68,7 @@ document.addEventListener( "DOMContentLoaded", () => {
       // Wave either left or right
       case "wave left":
       case "wave right":
-        command = mode;
+        command = mode.toLowerCase();
         break;
     }
 
@@ -100,8 +100,10 @@ document.addEventListener( "DOMContentLoaded", () => {
         dispatchParams( "brightness " + light );
 
       // Send mode command, origin either dropdown or mixer slider or delay slider
-      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) || e.detail.startsWith( "Delay" ) )
+      else if( e.detail === "mode" || e.detail.startsWith( "MX" ) || e.detail.startsWith( "Delay" ) ) {
         dispatchParams( command );
+        console.log( command );
+      }
 
       // Send logo command
       else if( e.detail === "logo" )
@@ -144,12 +146,19 @@ document.addEventListener( "DOMContentLoaded", () => {
       modeSelect.innerHTML = settings.mode;
       logoVal.checked = settings.logo;
 
-      console.log( response );
-
       // Update all sliders by calling their input event
       let updateables = [ rVal, gVal, bVal, delVal, lightVal ];
       for( let i = 0; i < updateables.length; i++ )
         updateables[ i ].dispatchEvent( new CustomEvent( "SettingsLoaded" ) );
+
+      // Update the dropdown item visibility
+      const items = document.getElementsByClassName( "dropdown" )[ 0 ].querySelector( ".dropdown-items" ).children;
+      for( let j = 0; j < items.length; j++ ) {
+        if( items[ j ].innerHTML.toLowerCase() === settings.mode.toLowerCase() )
+          items[ j ].style.display = "none";
+        else
+          items[ j ].style.display = "block";
+      }
 
       // Initial call
       update();
