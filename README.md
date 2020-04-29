@@ -20,3 +20,4 @@ Please check out the releases section of this repo, you can find binaries in the
 - [x] Package this as an OSX app
 - [x] Automatically download needed binary from repo
 - [x] Migrate downloading of all kinds from wget to curl
+- [ ] Look into per key lighting, seems kind of hard tho
