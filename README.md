@@ -21,3 +21,4 @@ Please check out the releases section of this repo, you can find binaries in the
 - [x] Automatically download needed binary from repo
 - [x] Migrate downloading of all kinds from wget to curl
 - [ ] Look into per key lighting, seems kind of hard tho
+- [ ] Check why this sucks up energy when doing nothing, according to ActivityMonitor
